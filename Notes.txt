@@ -1,0 +1,3 @@
+30 July 2016
+	by the way, sdl image, sdl net, sdl ttf, sdl mixer are all separately added
+	quick reminder, an sdl surface is software rendered, whereas sdl textures are hardware rendered
