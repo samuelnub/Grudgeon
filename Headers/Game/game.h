@@ -2,6 +2,7 @@
 #ifndef GAME_GAME_H
 #define GAME_GAME_H
 
+#include <Handler/settings.h>
 #include <Handler/input.h>
 #include <Handler/window.h>
 
@@ -15,6 +16,7 @@ public:
 
 
 	// Public classes for everyone to get stuff from
+	Settings settings;
 	Input input;
 	Window window;
 
