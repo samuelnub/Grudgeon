@@ -5,6 +5,7 @@ Game::Game()
 {
 	std::cout << "Constructor called on Game!\n";
 
+	this->settings.init(this);
 	this->input.init(this);
 	this->window.init(this);
 
