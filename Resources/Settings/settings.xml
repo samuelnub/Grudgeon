@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<root>
+  <setting name="WindowWidth" value="1280"/>
+  <setting name="WindowHeight" value="1024"/>
+  <setting name="WindowFullscreen" value="0"/>
+  <setting name="WindowBorderless" value="0"/>
+  <setting name="WindowResizable" value="1"/>
+</root>
