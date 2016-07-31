@@ -1,8 +1,12 @@
 <?xml version="1.0"?>
 <root>
-  <setting name="WindowWidth" value="1280"/>
-  <setting name="WindowHeight" value="1024"/>
-  <setting name="WindowFullscreen" value="0"/>
-  <setting name="WindowBorderless" value="0"/>
-  <setting name="WindowResizable" value="1"/>
+    <setting name="WindowWidth" value="1024"/>
+    <setting name="WindowHeight" value="768"/>
+    <setting name="WindowFullscreen" value="0"/>
+    <setting name="WindowBorderless" value="0"/>
+    <setting name="WindowResizable" value="1"/>
+    <setting name="WindowFramerate" value="60"/>
+    <setting name="WindowDisplayNum" value="0"/>
+    <setting name="ProgramName" value="Grudgeon"/>
+    <setting name="RenderScale" value="8"/>
 </root>

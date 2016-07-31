@@ -4,7 +4,8 @@
 Game::Game()
 {
 	std::cout << "Constructor called on Game!\n";
-
+	
+	SDL_Init(SDL_INIT_EVERYTHING);
 	this->settings.init(this);
 	this->input.init(this);
 	this->window.init(this);
@@ -25,5 +26,5 @@ void Game::tick()
 {
 	this->input.tick();
 	this->window.tick();
-
+	
 }

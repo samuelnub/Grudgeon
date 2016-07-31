@@ -106,7 +106,7 @@ void Input::process()
 			case SDL_WINDOWEVENT_FOCUS_LOST:
 				this->windowFocusLossEvent(i);
 				break;
-			case SDL_WINDOWEVENT_SIZE_CHANGED:
+			case (SDL_WINDOWEVENT_SIZE_CHANGED || SDL_WINDOWEVENT_RESIZED):
 				this->windowSizeChangeEvent(i);
 				break;
 			case SDL_WINDOWEVENT_MOVED:

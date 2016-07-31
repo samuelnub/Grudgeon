@@ -21,7 +21,7 @@ public:
 
 	int write(std::string settingName, std::string value);
 
-	// Get your setting, casted to your defined type
+	// Get your setting, casted to your defined type, yea I know, not very efficient to cast, but the time complexity for string conversion should be O(n) and its usually just a few chars to convert - so thats my lame excuse
 	inline bool getBool(std::string name)
 	{
 		return boost::lexical_cast<bool>(this->_settings.at(name));

@@ -3,3 +3,6 @@
 *.dll
 *.lastbuildstate
 /Debug/
+*.vcxproj
+Grudgeon.vcxproj.filters
+*.user

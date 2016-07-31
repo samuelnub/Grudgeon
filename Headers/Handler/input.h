@@ -88,7 +88,7 @@ public:
 		return this->_windowSizeChanged;
 	}
 
-	inline bool _didWindowMove()
+	inline bool didWindowMove()
 	{
 		return this->_windowMoved;
 	}

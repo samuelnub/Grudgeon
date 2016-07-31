@@ -1,3 +1,13 @@
 30 July 2016
 	by the way, sdl image, sdl net, sdl ttf, sdl mixer are all separately added
 	quick reminder, an sdl surface is software rendered, whereas sdl textures are hardware rendered
+
+31 July 2016
+	touchups on window class and how it handles window resizes or display changes
+
+TODO:
+	scene class which eventually calls SDL_RenderPresent
+	variable simulation speed by simply specifying a multiplier, with 1.0f being normal speed, and 0.1f being "cool slow mo"
+	you can modulate texture rgb values with SDL_SetTextureColorMod, http://lazyfoo.net/tutorials/SDL/12_color_modulation/index.php
+	use SDL_RenderCopyEx instead of the regular RenderCopy, which grants you stuff like rotation around an origin as well as flipping it
+	the scene class should split up its staged textures into static ones like the player and ui, and then the "world" which gets translated around the player(thanks for teaching me the mvp matrices; opengl)
