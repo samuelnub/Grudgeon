@@ -12,15 +12,18 @@
 	able to render sprites
 	didnt know why my test texture wasnt blitting, then i switched to a bmp, and abra kardabra and alakazam, it worked, thanks - image formats
 	sdl_image png loading needs lobpng16-16.dll, who'da thunk
+	oh, modding colors with SDL_SetTextureColorMod doesnt edit the original texture, but just applies your specified multiplier, so its safe, coolio http://stackoverflow.com/questions/24969783/is-it-safe-acceptable-to-call-sdl-settexturecolormod-every-frame-multiple-times. not too sure about alpha modding though. oh, same applies to alpha, coolio*2 https://wiki.libsdl.org/SDL_SetTextureAlphaMod, so uh, now renderables just have a bunch of redundant textures. i think i may reimplement the texture manager, and these renderables will simply have color and alpha values, in addition to their source and dest rect, rotation etc....
 
 TODO - next day:
 	work on displaying text with sdl_ttf
 	stop with the dupes in renderable.cpp
 	sort out sdl's working directory - sorted, made build directory the same as the source dir lol, >madlad
+	texture manager class instead of useless redundancies in each renderable
 
-TODO:
+TODO - decent future:
 	scene class which eventually calls SDL_RenderPresent
 	variable simulation speed by simply specifying a multiplier, with 1.0f being normal speed, and 0.1f being "cool slow mo"
 	you can modulate texture rgb values with SDL_SetTextureColorMod, http://lazyfoo.net/tutorials/SDL/12_color_modulation/index.php
 	use SDL_RenderCopyEx instead of the regular RenderCopy, which grants you stuff like rotation around an origin as well as flipping it
 	the scene class should split up its staged textures into static ones like the player and ui, and then the "world" which gets translated around the player(thanks for teaching me the mvp matrices; opengl)
+	may make it render everything to a texture of the window's width first, then blit it to the user, so that resizing isnt messed up, like a frame buffer https://gist.github.com/Twinklebear/8265888
