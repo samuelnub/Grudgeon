@@ -58,9 +58,9 @@ public:
 	Renderable();
 	~Renderable();
 	
-	void init(Game *game, std::string filePath, Vec2<int> sourceXY, Vec2<int> sourceWH, Vec2<int> destXY, Vec2<int> destWH, Vec2<float> scale = Vec2<float>(1.0f,1.0f), float angle = 0, Vec2<int> origin = Vec2<int>(), bool visible = true);
+	void init(Game *game, const std::string &filePath, Vec2<int> sourceXY, Vec2<int> sourceWH, Vec2<int> destXY, Vec2<int> destWH, Vec2<float> scale = Vec2<float>(1.0f,1.0f), float angle = 0, Vec2<int> origin = Vec2<int>(), bool visible = true);
 
-	void init(Game *game, std::string filePath, SDL_Rect sourceRect, SDL_Rect destRect, Vec2<float> scale = Vec2<float>(1.0f, 1.0f), float angle = 0, SDL_Point origin = SDL_Point(), bool visible = true);
+	void init(Game *game, const std::string &filePath, SDL_Rect sourceRect, SDL_Rect destRect, Vec2<float> scale = Vec2<float>(1.0f, 1.0f), float angle = 0, SDL_Point origin = SDL_Point(), bool visible = true);
 
 	inline SDL_Texture **getTexture()
 	{
@@ -107,8 +107,8 @@ public:
 
 	void flip(SDL_RendererFlip flip);
 
-	void storeAnim(std::string name, Animation anim);
-	void useAnim(std::string name, bool repeat = true);
+	void storeAnim(const std::string &name, Animation anim);
+	void useAnim(const std::string &name, bool repeat = true);
 
 	inline void setAnimating(bool animate)
 	{

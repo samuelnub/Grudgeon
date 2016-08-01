@@ -11,14 +11,14 @@ Renderable::~Renderable()
 {
 }
 
-void Renderable::init(Game * game, std::string filePath, Vec2<int> sourceXY, Vec2<int> sourceWH, Vec2<int> destXY, Vec2<int> destWH, Vec2<float> scale, float angle, Vec2<int> origin, bool visible)
+void Renderable::init(Game * game, const std::string &filePath, Vec2<int> sourceXY, Vec2<int> sourceWH, Vec2<int> destXY, Vec2<int> destWH, Vec2<float> scale, float angle, Vec2<int> origin, bool visible)
 {
 	this->_game = game;
 
 	this->_texture = IMG_LoadTexture(*this->_game->window.getRenderer(), filePath.c_str());
 	if (this->_texture == nullptr)
 	{
-		std::cout << "Couldn't load texture with the file path of " << filePath << "!\n";
+		std::cout << "Couldn't load texture with the file path of " << filePath << "!\n" << SDL_GetError() << "\n";
 	}
 
 	this->_sourceRect.x = destXY.x;
@@ -44,16 +44,18 @@ void Renderable::init(Game * game, std::string filePath, Vec2<int> sourceXY, Vec
 	this->_isAnimated = false;
 	this->_curAnimRepeat = true;
 	this->_curFrameIndex = Vec2<int>();
+
+	this->_visible = visible;
 }
 
-void Renderable::init(Game * game, std::string filePath, SDL_Rect sourceRect, SDL_Rect destRect, Vec2<float> scale, float angle, SDL_Point origin, bool visible)
+void Renderable::init(Game * game, const std::string &filePath, SDL_Rect sourceRect, SDL_Rect destRect, Vec2<float> scale, float angle, SDL_Point origin, bool visible)
 {
 	this->_game = game;
 
 	this->_texture = IMG_LoadTexture(*this->_game->window.getRenderer(), filePath.c_str());
 	if (this->_texture == nullptr)
 	{
-		std::cout << "Couldn't load texture with the file path of " << filePath << "!\n";
+		std::cout << "Couldn't load texture with the file path of " << filePath << "!\n" << SDL_GetError() << "\n";
 	}
 
 	this->_sourceRect = sourceRect;
@@ -71,14 +73,18 @@ void Renderable::init(Game * game, std::string filePath, SDL_Rect sourceRect, SD
 	this->_isAnimated = false;
 	this->_curAnimRepeat = true;
 	this->_curFrameIndex = Vec2<int>();
+
+	this->_visible = visible;
 }
 
 void Renderable::tick()
 {
-	if (this->_isAnimating)
+	if (this->_isAnimated && this->_isAnimating)
 	{
 		this->animate();
 	}
+
+	//TODO: temp only in renderable.cpp
 	if (this->_visible)
 	{
 		SDL_RenderCopyEx(*this->_game->window.getRenderer(), this->_texture, &this->_sourceRect, &this->_destRect, this->_angle, &this->_origin, this->_flipFlag);
@@ -159,26 +165,36 @@ void Renderable::animate()
 {
 	this->_timeElapsed += this->_game->input.getDelta();
 
+	this->_isAnimating = true;
+
 	if (this->_timeElapsed > this->_animations.at(this->_currentAnim).updateTime)
 	{
 		this->_timeElapsed -= this->_animations.at(this->_currentAnim).updateTime;
 		if (this->_curFrameIndex.x < this->_animations.at(this->_currentAnim).xyFrameCount.x)
 		{
 			this->_curFrameIndex.x++;
+			std::cout << "Incrementing frame index x\n";
 		}
-		else if (this->_curFrameIndex.x >= this->_animations.at(this->_currentAnim).xyFrameCount.x ||
+		else if (this->_curFrameIndex.x >= this->_animations.at(this->_currentAnim).xyFrameCount.x &&
 			this->_curFrameIndex.y < this->_animations.at(this->_currentAnim).xyFrameCount.y)
 		{
 			this->_curFrameIndex.x = 0;
 			this->_curFrameIndex.y++;
+			std::cout << "Incrementing frame index y and resetting x to 0\n";
 		}
-		else if(this->_curAnimRepeat == true)
+		else if (this->_curFrameIndex.x >= this->_animations.at(this->_currentAnim).xyFrameCount.x &&
+			this->_curFrameIndex.y >= this->_animations.at(this->_currentAnim).xyFrameCount.y &&
+			this->_curAnimRepeat == true)
 		{
 			this->_curFrameIndex = Vec2<int>();
+			std::cout << "Finished a cycle of animation, repeating!\n";
 		}
-		else
+		else if(this->_curFrameIndex.x >= this->_animations.at(this->_currentAnim).xyFrameCount.x &&
+			this->_curFrameIndex.y >= this->_animations.at(this->_currentAnim).xyFrameCount.y && 
+			this->_curAnimRepeat == false)
 		{
-			;
+			this->_isAnimating = false;
+			std::cout << "Stopped animation as repeat was false!\n";
 		}
 	}
 
@@ -188,13 +204,14 @@ void Renderable::animate()
 		(this->_curFrameIndex.y * this->_sourceRect.h);
 }
 
-void Renderable::storeAnim(std::string name, Animation anim)
+void Renderable::storeAnim(const std::string &name, Animation anim)
 {
 	this->_isAnimated = true;
+	this->_isAnimating = true;
 	this->_animations[name] = anim;
 }
 
-void Renderable::useAnim(std::string name, bool repeat)
+void Renderable::useAnim(const std::string &name, bool repeat)
 {
 	this->_currentAnim = name;
 
