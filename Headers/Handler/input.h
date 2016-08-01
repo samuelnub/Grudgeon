@@ -22,6 +22,11 @@ public:
 	{
 		return this->_deltaTime;
 	}
+	// Returns the total time the program's been open up till the start of the current frame
+	inline float getTotalTime()
+	{
+		return this->_totalTime;
+	}
 
 	inline bool wasKeyPressed(int key)
 	{
@@ -124,6 +129,7 @@ private:
 
 	float _deltaTime;
 	float _lastFrameTime;
+	float _totalTime;
 
 	void process();
 

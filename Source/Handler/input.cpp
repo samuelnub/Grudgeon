@@ -33,9 +33,9 @@ void Input::init(Game *game)
 
 void Input::tick()
 {
-	uint32_t curFrameTime = SDL_GetTicks();
-	this->_deltaTime = curFrameTime - this->_lastFrameTime;
-	this->_lastFrameTime = curFrameTime;
+	this->_totalTime = SDL_GetTicks();
+	this->_deltaTime = this->_totalTime - this->_lastFrameTime;
+	this->_lastFrameTime = this->_totalTime;
 
 	// Reset key and mouse events each tick, except held keys
 	std::fill(this->_pressedKeys.begin(), this->_pressedKeys.end(), false);
