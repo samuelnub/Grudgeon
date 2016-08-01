@@ -2,6 +2,8 @@
 #ifndef RENDER_SCENE_H
 #define RENDER_SCENE_H
 
+#include <SDL2/SDL.h>
+
 class Game;
 
 class Scene
@@ -12,8 +14,7 @@ public:
 
 	void init(Game *game);
 
-
-	void draw();
+	void tick();
 
 protected:
 
