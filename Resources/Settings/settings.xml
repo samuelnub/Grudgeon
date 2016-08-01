@@ -8,5 +8,7 @@
     <setting name="WindowFramerate" value="60"/>
     <setting name="WindowDisplayNum" value="0"/>
     <setting name="ProgramName" value="Grudgeon"/>
+    
     <setting name="RenderScale" value="8"/>
+    <setting name="TextureSize" value="16"/>
 </root>
