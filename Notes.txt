@@ -5,6 +5,19 @@
 31 July 2016
 	touchups on window class and how it handles window resizes or display changes
 
+1 August 2016
+	working on renderable class
+	sdl filepaths are tough as balls, whyyyyy
+	"why is this blank program using 50% of my cpu" "oh, i didnt limit the framerate"
+	able to render sprites
+	didnt know why my test texture wasnt blitting, then i switched to a bmp, and abra kardabra and alakazam, it worked, thanks - image formats
+	sdl_image png loading needs lobpng16-16.dll, who'da thunk
+
+TODO - next day:
+	work on displaying text with sdl_ttf
+	stop with the dupes in renderable.cpp
+	sort out sdl's working directory - sorted, made build directory the same as the source dir lol, >madlad
+
 TODO:
 	scene class which eventually calls SDL_RenderPresent
 	variable simulation speed by simply specifying a multiplier, with 1.0f being normal speed, and 0.1f being "cool slow mo"
