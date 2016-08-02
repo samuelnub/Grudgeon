@@ -37,6 +37,27 @@ struct WindowMode
 	}
 };
 
+struct RenderMode
+{
+	int w; // renderer logical size
+	int h;
+
+	float scaleX; // up/downscale to fit the windowmode
+	float scaleY;
+
+	RenderMode()
+	{
+		this->w = 210;
+		this->h = 190;
+	}
+
+	RenderMode(int newW, int newH)
+	{
+		this->w = newW;
+		this->h = newH;
+	}
+};
+
 class Window
 {
 public:
@@ -69,6 +90,11 @@ public:
 		return &this->_windowMode;
 	}
 
+	inline const RenderMode *getRenderMode()
+	{
+		return &this->_renderMode;
+	}
+
 protected:
 
 
@@ -87,8 +113,11 @@ private:
 
 	WindowMode _windowMode;
 
+	RenderMode _renderMode;
+
 	// Gets called on init and when tick'd if window's been resized etc...
 	void handle();
+	void scaleRenderer();
 };
 
 #endif
